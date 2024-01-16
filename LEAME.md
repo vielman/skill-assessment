@@ -33,8 +33,8 @@ La API a la que queremos que te conectes es https://quotes.rest/
 * Usar Composition API y setup script en componentes de Vue
 
 ## Desarrollador
-Nombre: `<tu nombre>` <br/>
-Correo electrónico: `<tu correo electrónico>`<br/>
+Nombre: Vielman Paredes <br/>
+Correo electrónico: pevjose@hotmail.com<br/>
 
 ## Instrucciones
 ### NO INICIES UNA NUEVA APLICACIÓN LARAVEL, ¡UTILIZA ESTE ESQUELETO EN SU LUGAR!
