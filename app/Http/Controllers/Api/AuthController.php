@@ -29,7 +29,7 @@ class AuthController extends Controller
     public function userProfile(Request $request) {
         return response()->json([
             "message" => "userProfile OK",
-            "userData" => auth()->user()
+            "data" => auth()->user()
             ], Response::HTTP_OK
         );
     }
