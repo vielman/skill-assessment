@@ -16,14 +16,15 @@ Route::post('login-api', [AuthController::class, 'login']);
 
 Route::group(['middleware' => ['auth:sanctum']], function(){
     Route::get('user-profile', [AuthController::class, 'userProfile']);
-    
-    
+    Route::get('quotes', [ConsumeApiController::class, 'index']);
+    Route::post('search-quotes', [ConsumeApiController::class, 'search']);
+    Route::apiResource('favoritequotes', FavoritequoteController::class);
 });
 
-Route::get('quotes', [ConsumeApiController::class, 'index']);
-Route::post('search-quotes', [ConsumeApiController::class, 'search']);
 
-Route::apiResource('favoritequotes', FavoritequoteController::class);
+
+
+
 
 
 
