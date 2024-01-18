@@ -20,10 +20,10 @@
                                 <tbody class="table-group-divider">
                                     <tr v-for="quote, i in quotes.data" :key="quote.id">
                                         <td>{{ (i+1) }}</td>
-                                        <td>{{ quote.title }}</td>
+                                        <td>{{ quote.quote }}</td>
                                         <td>
                                             <button class="btn btn-success"
-                                            @click="$event => addFavorite(quote.title)">
+                                            @click="$event => addFavorite(quote.quote, quote.author, quote.category)">
                                                 Favorite
                                             </button>
                                         </td>
@@ -61,11 +61,11 @@ const getQuotes = async () =>{
     )
 }
 
-const addFavorite = async (quote,) =>{
+const addFavorite = async (quote, author, category) =>{
     await axios.post('http://127.0.0.1:8000/api/favoritequotes',  {
         quote: quote,
-        author: 'Flintstone',
-        category: 'inspire',
+        author: author,
+        category: category,
         user_id: props.userid
     }).then(
         response =>(
