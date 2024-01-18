@@ -10,8 +10,6 @@ use Illuminate\Validation\ValidationException;
 use Exception;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 
-
-
 class FavoritequoteController extends Controller
 {
     /**
@@ -22,8 +20,9 @@ class FavoritequoteController extends Controller
     public function index()
     {
         try {
-            $user = auth()->user()->id;
-            $favoritequote = Favoritequote::where('user_id',$user)->get();
+            // $user = auth()->user()->id;
+            // $favoritequote = Favoritequote::where('user_id',$user)->get();
+            $favoritequote = Favoritequote::all();
             return response()->json(["message" => "favoriteQuote OK", "data" => $favoritequote], Response::HTTP_OK);
         } catch (ModelNotFoundException $e) {
              return response()->json(["message" => "Record not found ", "data" =>[]], Response::HTTP_NOT_FOUND);
@@ -44,7 +43,6 @@ class FavoritequoteController extends Controller
         try {
             $request->validate([
                 'quote' => ['required'],
-                'length' => ['required'],
                 'author' => ['required'],
                 'category' => ['required'],
                 'user_id' => ['required', 'exists:App\Models\User,id']
@@ -52,7 +50,6 @@ class FavoritequoteController extends Controller
     
             $favoritequote = new Favoritequote;
             $favoritequote->quote       = $request->quote;
-            $favoritequote->length      = $request->length;
             $favoritequote->author      = $request->author;
             $favoritequote->category    = $request->category;
             $favoritequote->user_id     = $request->user_id;

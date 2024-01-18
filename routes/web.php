@@ -17,6 +17,10 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+Route::view('/profile', 'profile')->name('profile')->middleware('auth');
+Route::view('/favorites', 'favorites')->name('favorites')->middleware('auth');
+
+
 Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');

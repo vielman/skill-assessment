@@ -16,7 +16,6 @@ return new class extends Migration
         Schema::create('favoritequotes', function (Blueprint $table) {
             $table->id();
             $table->string('quote',1000);
-            $table->string('length',10);
             $table->string('author',200);
             $table->string('category',200);
             $table->unsignedBigInteger('user_id');

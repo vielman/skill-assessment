@@ -2,6 +2,6 @@
 
 @section('content')
 <div class="container">
-    <quote-component userid="{{ Auth::user()->id }}"/>
+    <favorites-component />
 </div>
 @endsection

@@ -15,8 +15,10 @@ import { createApp } from 'vue';
 
 const app = createApp({});
 
-import ExampleComponent from './components/ExampleComponent.vue';
-app.component('example-component', ExampleComponent);
+import QuoteComponent from './components/QuoteComponent.vue';
+import FavoritesComponent from './components/FavoritesComponent.vue';
+app.component('quote-component', QuoteComponent);
+app.component('favorites-component', FavoritesComponent);
 
 /**
  * The following block of code may be used to automatically register your
