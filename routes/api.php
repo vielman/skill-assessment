@@ -27,6 +27,7 @@ Route::group(['middleware' => ['auth:sanctum', 'admin']], function(){
     Route::get('/admin/users', [UserController::class, 'index']);
     Route::get('/admin/user/{id}', [UserController::class, 'show']);
     Route::patch('/admin/user/{id}', [UserController::class, 'banning']);
+    Route::put('/admin/user', [UserController::class, 'update']);
 });
 
 
