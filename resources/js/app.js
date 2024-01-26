@@ -17,6 +17,8 @@ const app = createApp({});
 
 import QuoteComponent from './components/QuoteComponent.vue';
 import FavoritesComponent from './components/FavoritesComponent.vue';
+import UserComponent from './components/UserComponent.vue';
+app.component('users-component', UserComponent);
 app.component('quote-component', QuoteComponent);
 app.component('favorites-component', FavoritesComponent);
 

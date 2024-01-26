@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 use App\Models\Favoritequote;
-use App\Models\User;
 use Illuminate\Http\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Illuminate\Validation\ValidationException;
@@ -20,9 +19,8 @@ class FavoritequoteController extends Controller
     public function index()
     {
         try {
-            // $user = auth()->user()->id;
-            // $favoritequote = Favoritequote::where('user_id',$user)->get();
-            $favoritequote = Favoritequote::all();
+            $user = auth()->user()->id;
+            $favoritequote = Favoritequote::where('user_id',$user)->get();
             return response()->json(["message" => "favoriteQuote OK", "data" => $favoritequote], Response::HTTP_OK);
         } catch (ModelNotFoundException $e) {
              return response()->json(["message" => "Record not found ", "data" =>[]], Response::HTTP_NOT_FOUND);
@@ -44,14 +42,18 @@ class FavoritequoteController extends Controller
             $request->validate([
                 'quote' => ['required'],
                 'author' => ['required'],
-                'category' => ['required'],
                 'user_id' => ['required', 'exists:App\Models\User,id']
             ]);
-    
+            
+            $numberQuotesSaved = auth()->user()->number_quotes_saved;
+            $countQuotes = count(Favoritequote::where('user_id', $request->user_id)->get());
+            if ($countQuotes >= $numberQuotesSaved) {
+                return response(["message" => "You have exceeded the limit of saved quotes: ", "data" =>['number_quotes_saved'=> $numberQuotesSaved]], Response::HTTP_UNPROCESSABLE_ENTITY);
+            }
+
             $favoritequote = new Favoritequote;
             $favoritequote->quote       = $request->quote;
             $favoritequote->author      = $request->author;
-            $favoritequote->category    = $request->category;
             $favoritequote->user_id     = $request->user_id;
             $favoritequote->save();
     

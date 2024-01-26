@@ -17,7 +17,6 @@ return new class extends Migration
             $table->id();
             $table->string('quote',1000);
             $table->string('author',200);
-            $table->string('category',200);
             $table->unsignedBigInteger('user_id');
             $table->timestamps();
 

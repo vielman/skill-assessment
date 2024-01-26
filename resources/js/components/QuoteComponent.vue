@@ -7,7 +7,7 @@
                     <div class="card-body">
                         <div class=" card-body d-grid gap-2 col-6 mx-auto">
                             <button class="btn btn-warning"
-                             @click="$event => getQuotes()">Update Quote
+                             @click="increment" :disabled="blockutton">Update Quote
                              </button>
                         </div>
                         <div class="table-responsive">
@@ -18,7 +18,7 @@
                                     </tr>
                                 </thead>
                                 <tbody class="table-group-divider">
-                                    <tr v-for="quote, i in quotes.data" :key="quote.id">
+                                    <tr v-for="quote, i in quotes" :key="quote.id">
                                         <td>{{ (i+1) }}</td>
                                         <td>{{ quote.quote }}</td>
                                         <td>
@@ -40,23 +40,44 @@
 
 <script setup>
 import axios from 'axios';
-import{ref , onMounted} from 'vue'
+import{ref , onMounted, computed} from 'vue'
 
 const props = defineProps({
     userid: {
-        type: Number,
+        type: Text,
         required: true
     }
 });
 
 const header = "Quotes"
-onMounted( ()=> {getQuotes()})
+onMounted( ()=> { getQuotes() })
 const quotes = ref([])
+const counter = ref(0);
+
+const increment = () => {
+    counter.value++
+    getQuotes()
+}
+
+const reset = () => {
+    counter.value = 0;
+}
+
+const blockutton = computed(() => {
+    console.log(counter.value )
+    if (counter.value >= 30) {
+     return true   
+    }
+})
+
+setInterval(() => {
+   reset()
+}, (1000 * 60));
 
 const getQuotes = async () =>{
     await axios.get('http://127.0.0.1:8000/api/quotes').then(
         response =>(
-            quotes.value = response.data
+            quotes.value = response.data.data.quotes
         ) 
     )
 }
@@ -65,12 +86,15 @@ const addFavorite = async (quote, author, category) =>{
     await axios.post('http://127.0.0.1:8000/api/favoritequotes',  {
         quote: quote,
         author: author,
-        category: category,
         user_id: props.userid
-    }).then(
+    })
+    .then(
         response =>(
-            alert('successfully added to favorites')
+            alert('Successfully added to favorites')
         )
-    ) 
+    ).catch(error => {
+        let data = error.response.data.data.number_quotes_saved ? error.response.data.data.number_quotes_saved : error.response.data.data
+        alert(error.response.data.message + '' +  data)
+    })
 }
 </script>

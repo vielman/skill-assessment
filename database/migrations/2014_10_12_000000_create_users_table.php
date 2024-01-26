@@ -22,6 +22,7 @@ return new class extends Migration
             $table->rememberToken();
             $table->boolean('is_admin')->default(0);
             $table->boolean('is_active')->default(1);
+            $table->integer('number_quotes_saved')->default(5);
             $table->timestamps();
         });
     }

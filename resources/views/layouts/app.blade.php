@@ -49,12 +49,20 @@
                                 </li>
                             @endif
                         @else
+                            @if (Auth::user()->is_admin)
                             <li class="nav-item">
-                                <a class="nav-link" href="{{ url('/home') }}">{{ __('Quotes') }}</a>
+                                    <a class="nav-link" href="{{ url('/home') }}">{{ __('Admin') }}</a>
                             </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="{{ url('/favorites') }}">{{ __('Favorites') }}</a>
-                            </li>
+            
+                            @else
+                                <li class="nav-item">
+                                    <a class="nav-link" href="{{ url('/home') }}">{{ __('Quotes') }}</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="{{ url('/favorites') }}">{{ __('Favorites') }}</a>
+                                </li>
+                            @endif
+                            
                             <li class="nav-item dropdown">
                                 <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
                                     {{ Auth::user()->name }}

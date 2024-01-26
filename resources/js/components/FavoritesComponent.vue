@@ -55,6 +55,5 @@ const deleteFavorite = async (id) =>{
             getFavorites()
         )
     )
-    
 }
 </script>
