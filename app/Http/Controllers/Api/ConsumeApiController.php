@@ -25,8 +25,7 @@ class ConsumeApiController extends Controller
                 'accept' => 'application/json',
                 'Authorization' => 'Bearer '.$apiKey,
             ])->get($apiEndpoint,  [
-                'limit' => '5',
-                'language' => 'en'
+                'limit' => '5'
             ]);
             return response()->json(["message" => "quote OK", "data" => $quote->json()], Response::HTTP_OK);
         } catch (ValidationException $e) {

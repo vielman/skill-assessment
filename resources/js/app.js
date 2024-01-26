@@ -18,9 +18,11 @@ const app = createApp({});
 import QuoteComponent from './components/QuoteComponent.vue';
 import FavoritesComponent from './components/FavoritesComponent.vue';
 import UserComponent from './components/UserComponent.vue';
+import DisabledComponent from './components/DisabledComponent.vue';
 app.component('users-component', UserComponent);
 app.component('quote-component', QuoteComponent);
 app.component('favorites-component', FavoritesComponent);
+app.component('disabled-component', DisabledComponent);
 
 /**
  * The following block of code may be used to automatically register your

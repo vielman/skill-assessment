@@ -19,8 +19,6 @@ class AdminMiddleware
         if (auth()->check() && auth()->user()->is_admin)
             return $next($request);
 
-        //return redirect('/');
-        //return redirect()->back()->with("mensaje", "No puedes acceder al módulo seleccionado");
         return route('login');
     }
 }

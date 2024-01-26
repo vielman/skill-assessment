@@ -9,6 +9,11 @@
                 <div class="card-body">
                     <p>Name: {{ Auth::user()->name }}</p>
                     <p>Email: {{ Auth::user()->email }}</p> 
+                    @if (Auth::user()->is_active == 1)
+                    <p>Active: Yes</p>
+                    @else
+                    <p>Active: No</p>
+                    @endif
                 </div>
             </div>
         </div>

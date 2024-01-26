@@ -55,9 +55,11 @@
                             </li>
             
                             @else
+                                @if (Auth::user()->is_active == 1)
                                 <li class="nav-item">
                                     <a class="nav-link" href="{{ url('/home') }}">{{ __('Quotes') }}</a>
                                 </li>
+                                @endif
                                 <li class="nav-item">
                                     <a class="nav-link" href="{{ url('/favorites') }}">{{ __('Favorites') }}</a>
                                 </li>
